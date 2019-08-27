@@ -1,0 +1,5 @@
+author = Yuyutsu
+version = 0.1.1
+displayName = Guns, Glorious Guns!
+languageVersion = 6
+

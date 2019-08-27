@@ -1,0 +1,218 @@
+using Terraria;
+using Terraria.Utilities;
+using System;
+using Terraria.ID;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.IO;
+using Terraria.ModLoader.IO;
+using Terraria.ModLoader;
+using Terraria.DataStructures;
+using GloriousGuns.Items;
+using System.Collections.Generic;
+
+
+namespace GloriousGuns.Items.Tediore.ShotgunWhite
+{
+	public class HomeSecurity : ModItem
+	{
+		public static string[] RandNames = { "Value","Target","Bulk", "Genuine", "Top-Notch" };
+        private Vector2 newVect;
+		protected ushort nameIndex;
+		public int shotgunBullets = 7;
+		//protected int counter;
+
+		public string WeaponName => RandNames[nameIndex%RandNames.Length]+" Home Security";
+
+		public override bool CloneNewInstances => false;
+
+		//Stats
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("Home Security");
+			Tooltip.SetDefault("Thrown like a grenade when reloaded\nReloads every "+ 5 + " shots");
+		}
+		public override void SetDefaults()
+		{
+			item.ranged = true;
+			item.width = 64;
+			item.height = 20;
+			item.useStyle = 5;
+			item.noMelee = true;
+			item.useTurn = false;
+			item.rare = 2;
+			item.autoReuse = false;
+			item.shoot = 10;
+			item.useAmmo = AmmoID.Bullet;
+
+			Generate();
+		}
+		public override ModItem Clone(Item itemClone)
+		{
+			var myClone = (HomeSecurity)base.Clone(itemClone);
+			
+			myClone.nameIndex = nameIndex;
+			myClone.item.useTime = item.useAnimation = item.useTime;
+			myClone.item.damage = item.damage;
+			myClone.item.reuseDelay = item.reuseDelay;
+			myClone.item.value = item.value;
+			myClone.item.knockBack = item.knockBack;
+			myClone.item.shootSpeed = item.shootSpeed;
+			myClone.shotgunBullets = shotgunBullets;
+			myClone.ApplyStats();
+
+			return myClone;
+		}
+
+		//Behavior
+		public override bool Shoot(Player player,ref Vector2 position,ref float speedX,ref float speedY,ref int type,ref int damage,ref float knockBack)
+		{
+			shotgunBullets--;
+			Vector2 muzzleOffset = Vector2.Normalize(new Vector2(speedX, speedY - 2)) * 30f;
+	    	Vector2 origVect = new Vector2(speedX, speedY);
+			if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
+			{
+				position += muzzleOffset;
+			}
+			if (shotgunBullets == 1)
+			{
+				item.useStyle = 1;
+                Main.PlaySound(new Terraria.Audio.LegacySoundStyle(2,1));
+                item.noUseGraphic = true;
+				type = mod.ProjectileType("HomeSecurity_Proj");
+                Main.PlaySound(new Terraria.Audio.LegacySoundStyle(25, 1));
+                for (int index1 = 0; index1 < 5; ++index1)
+                {
+                int index2 = Dust.NewDust(player.position, player.width, player.height, 263, 0.0f, 0.0f, (int) byte.MaxValue, new Color(), (float) new UnifiedRandom().Next(20, 26) * 0.1f);
+                Main.dust[index2].noLight = true;
+                Main.dust[index2].noGravity = true;
+                Main.dust[index2].velocity *= 0.5f;
+                Main.dust[index2].scale *= .6f;
+                }
+                int proj2 = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage /2 * 3, knockBack, player.whoAmI);
+			}
+            else
+            {
+                item.useStyle = 5;
+                item.noUseGraphic = false;
+                Main.PlaySound(new Terraria.Audio.LegacySoundStyle(2,36));
+                for (int X = 0; X <= 3; X++)
+                {
+                    if (Main.rand.Next(2) == 1)
+                    {
+                        newVect = origVect.RotatedBy(System.Math.PI / (Main.rand.Next(80, 400) / 8));
+                    }
+                    else
+                    {
+                        newVect = origVect.RotatedBy(-System.Math.PI / (Main.rand.Next(80, 400) / 8));
+                    }
+                int proj2 = Projectile.NewProjectile(position.X, position.Y, newVect.X, newVect.Y, type, damage, knockBack, player.whoAmI);
+                Projectile newProj2 = Main.projectile[proj2];
+                }
+            }
+            if (shotgunBullets <= 1)
+            {
+                shotgunBullets = 7;
+            }
+			return false;
+		}
+		public override void HoldItem(Player player)
+		{
+			if (shotgunBullets == 1)
+			{
+                item.shootSpeed = 2f;
+			}
+        }
+
+		//IO
+		public override TagCompound Save() => new TagCompound {
+			{ nameof(nameIndex),nameIndex },
+			{ nameof(item.useTime),item.useTime },
+			{ nameof(item.damage),item.damage },
+			{ nameof(item.reuseDelay),item.reuseDelay },
+			{ nameof(item.value),item.value },
+			{ nameof(item.knockBack),item.knockBack },
+			{ nameof(shotgunBullets),shotgunBullets },
+			{ nameof(item.shootSpeed),item.shootSpeed }
+		};
+		public override void Load(TagCompound tag)
+		{
+			if(!tag.ContainsKey(nameof(nameIndex))) {
+				return;
+			}
+			
+			nameIndex = tag.Get<ushort>(nameof(nameIndex));
+			item.useAnimation = item.useTime = tag.Get<int>(nameof(item.useTime));
+			item.damage = tag.Get<int>(nameof(item.damage));
+			item.reuseDelay = tag.Get<int>(nameof(item.reuseDelay));
+			item.value = tag.Get<int>(nameof(item.value));
+			item.knockBack = tag.Get<float>(nameof(item.knockBack));
+			item.shootSpeed = tag.Get<float>(nameof(item.shootSpeed));
+			shotgunBullets = tag.Get<int>(nameof(shotgunBullets));
+
+			ApplyStats();
+		}
+
+		//Net
+		public override void NetSend(BinaryWriter writer)
+		{
+			writer.Write(nameIndex);
+			writer.Write(item.useTime);
+			writer.Write(item.damage);
+			writer.Write(item.reuseDelay);
+			writer.Write(item.value);
+			writer.Write(item.knockBack);
+			writer.Write(item.shootSpeed);
+			writer.Write(shotgunBullets);
+		}
+		public override void NetRecieve(BinaryReader reader)
+		{
+			nameIndex = reader.ReadUInt16();
+			item.useAnimation = item.useTime = reader.ReadInt32();
+			item.damage = reader.ReadInt32();
+			item.reuseDelay = reader.ReadInt32();
+			item.value = reader.ReadInt32();
+			item.knockBack = reader.ReadSingle();
+			item.shootSpeed = reader.ReadSingle();
+			shotgunBullets = reader.ReadInt32();
+
+			ApplyStats();
+		}
+
+		//Rendering
+	  	public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            TooltipLine line1 = new TooltipLine(mod, "Damage", "Tediore");
+            line1.overrideColor = new Color(176, 157, 127);
+            tooltips.Add(line1);
+        }
+		public override Vector2? HoldoutOffset() => new Vector2(-5,0);
+		public override bool PreDrawInWorld(SpriteBatch spriteBatch,Color lightColor,Color alphaColor,ref float rotation,ref float scale,int whoAmI)
+		{
+			Lighting.AddLight(item.position,0.45f,0.48f,0.5f);
+			Texture2D texture = Main.itemTexture[item.type];
+
+			spriteBatch.Draw(Main.extraTexture[60],item.position-Main.screenPosition+item.Size*0.5f+new Vector2(-38,-60f),null,new Color(150,150,150,0),0f,texture.Size() * 0.5f,scale,SpriteEffects.None,0f);
+
+			return true;
+		}
+
+		public void Generate()
+		{
+			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+
+			item.useAnimation = item.useTime = new UnifiedRandom().Next(25, 35);
+			item.damage =  new UnifiedRandom().Next(9,11);
+			item.knockBack =  new UnifiedRandom().Next(5, 8);
+			item.value = new UnifiedRandom().Next(6000, 14000);
+            item.reuseDelay = new UnifiedRandom().Next(12,18);
+			item.shootSpeed =  new UnifiedRandom().NextFloat(5f,7f);
+
+			ApplyStats();
+		}
+		public void ApplyStats()
+		{
+			item.SetNameOverride(WeaponName);
+		}
+	}
+}
