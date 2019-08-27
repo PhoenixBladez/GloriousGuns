@@ -12,14 +12,16 @@ using System.Collections.Generic;
 
 namespace GloriousGuns.Items.Torgue
 {
-	public class HandCannon_Dahl : ModItem
+	public class HandCannon_Dahl : TorgueGun
 	{
-		public static string[] RandNames = { "Lumpy","Slippery","Straight","Hard","Easy","Thick","Wanton" };
-
 		protected ushort nameIndex;
 		//protected int counter;
 
-		public string WeaponName => RandNames[nameIndex%RandNames.Length]+" Hand Cannon";
+		public override string[] RandNames
+		{
+			get => new string[] {"Lumpy", "Slippery", "Straight", "Hard", "Easy", "Thick", "Wanton"};
+		}
+		public override string WeaponName => RandNames[nameIndex%RandNames.Length]+" Hand Cannon";
 
 		public override bool CloneNewInstances => false;
 
@@ -29,7 +31,8 @@ namespace GloriousGuns.Items.Torgue
 			DisplayName.SetDefault("Hand Cannon");
 			Tooltip.SetDefault("Consumes 2 ammo per shot");
 		}
-		public override void SetDefaults()
+
+		public override void NewSetDefaults()
 		{
 			item.ranged = true;
 			item.width = 42;
@@ -45,30 +48,6 @@ namespace GloriousGuns.Items.Torgue
 
 			Generate();
 		}
-		public override ModItem Clone(Item itemClone)
-		{
-			var myClone = (HandCannon_Dahl)base.Clone(itemClone);
-			
-			myClone.nameIndex = nameIndex;
-			myClone.item.useTime = item.useAnimation = item.useTime;
-			myClone.item.damage = item.damage;
-			myClone.item.reuseDelay = item.reuseDelay;
-			myClone.item.value = item.value;
-			myClone.item.knockBack = item.knockBack;
-			myClone.item.shootSpeed = item.shootSpeed;
-			myClone.ApplyStats();
-
-			return myClone;
-		}
-		public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            TooltipLine line = new TooltipLine(mod, "ItemName", "Explosive Weapon\nEnough said");
-            line.overrideColor = new Color(237, 198, 21);
-            tooltips.Add(line);
-            TooltipLine line1 = new TooltipLine(mod, "Damage", "Torgue");
-            line1.overrideColor = new Color(176, 157, 127);
-            tooltips.Add(line1);
-        }
 
 		//Behavior
 		public override bool Shoot(Player player,ref Vector2 position,ref float speedX,ref float speedY,ref int type,ref int damage,ref float knockBack)
@@ -97,57 +76,6 @@ namespace GloriousGuns.Items.Torgue
 			return true;
 		}
 
-		//IO
-		public override TagCompound Save() => new TagCompound {
-			{ nameof(nameIndex),nameIndex },
-			{ nameof(item.useTime),item.useTime },
-			{ nameof(item.damage),item.damage },
-			{ nameof(item.reuseDelay),item.reuseDelay },
-			{ nameof(item.value),item.value },
-			{ nameof(item.knockBack),item.knockBack },
-			{ nameof(item.shootSpeed),item.shootSpeed }
-		};
-		public override void Load(TagCompound tag)
-		{
-			if(!tag.ContainsKey(nameof(nameIndex))) {
-				return;
-			}
-			
-			nameIndex = tag.Get<ushort>(nameof(nameIndex));
-			item.useAnimation = item.useTime = tag.Get<int>(nameof(item.useTime));
-			item.damage = tag.Get<int>(nameof(item.damage));
-			item.reuseDelay = tag.Get<int>(nameof(item.reuseDelay));
-			item.value = tag.Get<int>(nameof(item.value));
-			item.knockBack = tag.Get<float>(nameof(item.knockBack));
-			item.shootSpeed = tag.Get<float>(nameof(item.shootSpeed));
-
-			ApplyStats();
-		}
-
-		//Net
-		public override void NetSend(BinaryWriter writer)
-		{
-			writer.Write(nameIndex);
-			writer.Write(item.useTime);
-			writer.Write(item.damage);
-			writer.Write(item.reuseDelay);
-			writer.Write(item.value);
-			writer.Write(item.knockBack);
-			writer.Write(item.shootSpeed);
-		}
-		public override void NetRecieve(BinaryReader reader)
-		{
-			nameIndex = reader.ReadUInt16();
-			item.useAnimation = item.useTime = reader.ReadInt32();
-			item.damage = reader.ReadInt32();
-			item.reuseDelay = reader.ReadInt32();
-			item.value = reader.ReadInt32();
-			item.knockBack = reader.ReadSingle();
-			item.shootSpeed = reader.ReadSingle();
-
-			ApplyStats();
-		}
-
 		//Rendering
 		public override Vector2? HoldoutOffset() => new Vector2(-3,0);
 		public override bool PreDrawInWorld(SpriteBatch spriteBatch,Color lightColor,Color alphaColor,ref float rotation,ref float scale,int whoAmI)
@@ -160,22 +88,16 @@ namespace GloriousGuns.Items.Torgue
 			return true;
 		}
 
-		public void Generate()
+		public override void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(16, 25);
-			item.damage =  new UnifiedRandom().Next(16,21);
-			item.knockBack =  new UnifiedRandom().Next(2,4);
-			item.value = new UnifiedRandom().Next(1000,2500);
-            item.reuseDelay = new UnifiedRandom().Next(15,25);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(.2f,1.2f);
-
-			ApplyStats();
-		}
-		public void ApplyStats()
-		{
-			item.SetNameOverride(WeaponName);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(16, 25);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(16,21);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(2,4);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(1000,2500);
+            item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(15,25);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(.2f,1.2f);
 		}
 	}
 }

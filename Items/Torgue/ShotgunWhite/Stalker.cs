@@ -12,9 +12,9 @@ using System.Collections.Generic;
 
 namespace GloriousGuns.Items.Torgue.ShotgunWhite
 {
-	public class Stalker : ModItem
+	public class Stalker : TorgueGun
 	{
-		public static string[] RandNames = { "Lumpy","Straight","Hard","Easy","Thick" };
+		public override string[] RandNames => new string[] { "Lumpy","Straight","Hard","Easy","Thick" };
 
 		protected ushort nameIndex;
 		//protected int counter;
@@ -28,7 +28,7 @@ namespace GloriousGuns.Items.Torgue.ShotgunWhite
 		{
 			DisplayName.SetDefault("Stalker");
 		}
-		public override void SetDefaults()
+		public override void NewSetDefaults()
 		{
 			item.ranged = true;
 			item.width = 74;
@@ -41,34 +41,7 @@ namespace GloriousGuns.Items.Torgue.ShotgunWhite
 			item.autoReuse = false;
 			item.shoot = 10;
 			item.useAmmo = AmmoID.Bullet;
-
-			Generate();
 		}
-		public override ModItem Clone(Item itemClone)
-		{
-			var myClone = (Stalker)base.Clone(itemClone);
-			
-			myClone.nameIndex = nameIndex;
-			myClone.item.useTime = item.useAnimation = item.useTime;
-			myClone.item.damage = item.damage;
-			myClone.item.reuseDelay = item.reuseDelay;
-			myClone.item.value = item.value;
-			myClone.item.knockBack = item.knockBack;
-			myClone.item.shootSpeed = item.shootSpeed;
-			myClone.ApplyStats();
-
-			return myClone;
-		}
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            TooltipLine line = new TooltipLine(mod, "ItemName", "Explosive Weapon\nEnough said");
-            line.overrideColor = new Color(237, 198, 21);
-            tooltips.Add(line);
-            TooltipLine line1 = new TooltipLine(mod, "Damage", "Torgue");
-            line1.overrideColor = new Color(176, 157, 127);
-            tooltips.Add(line1);
-        }
-
 
 		//Behavior
 		public override bool Shoot(Player player,ref Vector2 position,ref float speedX,ref float speedY,ref int type,ref int damage,ref float knockBack)
@@ -93,57 +66,6 @@ namespace GloriousGuns.Items.Torgue.ShotgunWhite
 			return false;
 		}
 
-		//IO
-		public override TagCompound Save() => new TagCompound {
-			{ nameof(nameIndex),nameIndex },
-			{ nameof(item.useTime),item.useTime },
-			{ nameof(item.damage),item.damage },
-			{ nameof(item.reuseDelay),item.reuseDelay },
-			{ nameof(item.value),item.value },
-			{ nameof(item.knockBack),item.knockBack },
-			{ nameof(item.shootSpeed),item.shootSpeed }
-		};
-		public override void Load(TagCompound tag)
-		{
-			if(!tag.ContainsKey(nameof(nameIndex))) {
-				return;
-			}
-			
-			nameIndex = tag.Get<ushort>(nameof(nameIndex));
-			item.useAnimation = item.useTime = tag.Get<int>(nameof(item.useTime));
-			item.damage = tag.Get<int>(nameof(item.damage));
-			item.reuseDelay = tag.Get<int>(nameof(item.reuseDelay));
-			item.value = tag.Get<int>(nameof(item.value));
-			item.knockBack = tag.Get<float>(nameof(item.knockBack));
-			item.shootSpeed = tag.Get<float>(nameof(item.shootSpeed));
-
-			ApplyStats();
-		}
-
-		//Net
-		public override void NetSend(BinaryWriter writer)
-		{
-			writer.Write(nameIndex);
-			writer.Write(item.useTime);
-			writer.Write(item.damage);
-			writer.Write(item.reuseDelay);
-			writer.Write(item.value);
-			writer.Write(item.knockBack);
-			writer.Write(item.shootSpeed);
-		}
-		public override void NetRecieve(BinaryReader reader)
-		{
-			nameIndex = reader.ReadUInt16();
-			item.useAnimation = item.useTime = reader.ReadInt32();
-			item.damage = reader.ReadInt32();
-			item.reuseDelay = reader.ReadInt32();
-			item.value = reader.ReadInt32();
-			item.knockBack = reader.ReadSingle();
-			item.shootSpeed = reader.ReadSingle();
-
-			ApplyStats();
-		}
-
 		//Rendering
 		public override Vector2? HoldoutOffset() => new Vector2(-16,0);
 		public override bool PreDrawInWorld(SpriteBatch spriteBatch,Color lightColor,Color alphaColor,ref float rotation,ref float scale,int whoAmI)
@@ -156,23 +78,16 @@ namespace GloriousGuns.Items.Torgue.ShotgunWhite
 			return true;
 		}
 
-		public void Generate()
+		public override void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(32, 42);
-			item.damage =  new UnifiedRandom().Next(10,14);
-			item.knockBack =  new UnifiedRandom().Next(6,9);
-			item.value = new UnifiedRandom().Next(10000,25000);
-            item.reuseDelay = new UnifiedRandom().Next(20,30);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(.2f,1.2f);
-
-			ApplyStats();
-		}
-
-		public void ApplyStats()
-		{
-			item.SetNameOverride(WeaponName);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(32, 42);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(10,14);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(6,9);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(10000,25000);
+            item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(20,30);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(.2f,1.2f);
 		}
 	}
 }
