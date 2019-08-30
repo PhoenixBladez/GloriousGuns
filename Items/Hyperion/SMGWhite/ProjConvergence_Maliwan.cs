@@ -177,7 +177,7 @@ namespace GloriousGuns.Items.Hyperion.SMGWhite
 			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
 			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(7, 10);
-			item.damage =  GloriousGuns.instance.gloriousRNG.Next(3,5);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(5,7);
 			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
 			item.value = GloriousGuns.instance.gloriousRNG.Next(11000,15000);
 			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(45, 55);

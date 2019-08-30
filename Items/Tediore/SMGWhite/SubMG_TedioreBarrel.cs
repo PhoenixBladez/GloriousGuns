@@ -185,7 +185,7 @@ namespace GloriousGuns.Items.Tediore.SMGWhite
 			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
 			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(7, 10);
-			item.damage =  GloriousGuns.instance.gloriousRNG.Next(3,4);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(5,6);
 			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
 			item.value = GloriousGuns.instance.gloriousRNG.Next(12000,15000);
 			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(60, 80);

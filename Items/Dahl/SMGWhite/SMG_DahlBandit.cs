@@ -203,7 +203,7 @@ namespace GloriousGuns.Items.Dahl.SMGWhite
 			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
 			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(9, 11);
-			item.damage =  GloriousGuns.instance.gloriousRNG.Next(4,6);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(5,7);
 			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
 			item.value = GloriousGuns.instance.gloriousRNG.Next(11000,15000);
 			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(60, 90);
