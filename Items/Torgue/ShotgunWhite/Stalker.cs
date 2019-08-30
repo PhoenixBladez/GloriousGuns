@@ -18,9 +18,7 @@ namespace GloriousGuns.Items.Torgue.ShotgunWhite
 
 		protected ushort nameIndex;
 		//protected int counter;
-
-		public string WeaponName => RandNames[nameIndex%RandNames.Length]+" Stalker";
-
+		public override string WeaponName => RandNames[nameIndex%RandNames.Length]+" Stalker";
 		public override bool CloneNewInstances => false;
 
 		//Stats

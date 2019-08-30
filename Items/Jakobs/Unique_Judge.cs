@@ -179,7 +179,7 @@ namespace GloriousGuns.Items.Jakobs
 			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
 			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(4, 6);
-			item.damage =  GloriousGuns.instance.gloriousRNG.Next(20, 22);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(15, 18);
 			item.crit =  GloriousGuns.instance.gloriousRNG.Next(1, 3);
 			item.value = GloriousGuns.instance.gloriousRNG.Next(120000, 125000);
 			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(8f,9f);

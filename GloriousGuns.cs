@@ -12,10 +12,6 @@ namespace GloriousGuns
 		public GloriousGuns()
 		{
 			instance = this;
-		}
-
-		public override void PostSetupContent()
-		{
 			gloriousRNG = new UnifiedRandom();
 		}
 

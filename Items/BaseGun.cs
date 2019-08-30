@@ -16,7 +16,7 @@ namespace GloriousGuns.Items
 	{
 
 		public abstract string[] RandNames { get; }
-		public abstract string WeaponName { get; };
+		public abstract string WeaponName { get; }
 
 		protected ushort nameIndex;
 
