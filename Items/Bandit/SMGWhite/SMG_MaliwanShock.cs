@@ -202,14 +202,14 @@ namespace GloriousGuns.Items.Bandit.SMGWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(7, 9);
-			item.damage =  new UnifiedRandom().Next(3,5);
-			item.knockBack =  new UnifiedRandom().Next(0,1);
-			item.value = new UnifiedRandom().Next(12000,15000);
-			SMGBulletsMax = new UnifiedRandom().Next(50, 60);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,10f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(7, 9);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(3,5);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(12000,15000);
+			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(50, 60);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,10f);
 
 			ApplyStats();
 		}

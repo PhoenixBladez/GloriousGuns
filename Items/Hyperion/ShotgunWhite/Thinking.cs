@@ -91,7 +91,7 @@ namespace GloriousGuns.Items.Hyperion.ShotgunWhite
                 Main.PlaySound(new Terraria.Audio.LegacySoundStyle(25, 1));
                 for (int index1 = 0; index1 < 5; ++index1)
                 {
-                int index2 = Dust.NewDust(player.position, player.width, player.height, 263, 0.0f, 0.0f, (int) byte.MaxValue, new Color(), (float) new UnifiedRandom().Next(20, 26) * 0.1f);
+                int index2 = Dust.NewDust(player.position, player.width, player.height, 263, 0.0f, 0.0f, (int) byte.MaxValue, new Color(), (float) GloriousGuns.instance.gloriousRNG.Next(20, 26) * 0.1f);
                 Main.dust[index2].noLight = true;
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].velocity *= 0.5f;
@@ -175,13 +175,13 @@ namespace GloriousGuns.Items.Hyperion.ShotgunWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(32, 42);
-			item.damage =  new UnifiedRandom().Next(8,12);
-			item.knockBack =  new UnifiedRandom().Next(3,6);
-			item.value = new UnifiedRandom().Next(12000,20000);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(5f,9f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(32, 42);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(8,12);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(3,6);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(12000,20000);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(5f,9f);
 
 			ApplyStats();
 		}

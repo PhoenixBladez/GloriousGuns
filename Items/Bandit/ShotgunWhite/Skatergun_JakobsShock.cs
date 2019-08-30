@@ -191,14 +191,14 @@ namespace GloriousGuns.Items.Bandit.ShotgunWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(32, 44);
-			item.damage =  new UnifiedRandom().Next(10,13);
-			item.knockBack =  new UnifiedRandom().Next(6,8);
-			item.reuseDelay = new UnifiedRandom().Next(18,30);
-			item.value = new UnifiedRandom().Next(11000,18000);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(4f,7f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(32, 44);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(10,13);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(6,8);
+			item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(18,30);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(11000,18000);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(4f,7f);
 
 			ApplyStats();
 		}

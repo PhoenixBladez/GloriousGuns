@@ -148,13 +148,13 @@ namespace GloriousGuns.Items.Bandit
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(20, 30);
-			item.damage =  new UnifiedRandom().Next(13,16);
-			item.knockBack =  new UnifiedRandom().Next(2,3);
-			item.reuseDelay = new UnifiedRandom().Next(15,25);
-			item.value = new UnifiedRandom().Next(1,5);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,10f);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(20, 30);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(13,16);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(2,3);
+			item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(15,25);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(1,5);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,10f);
 
 			ApplyStats();
 		}

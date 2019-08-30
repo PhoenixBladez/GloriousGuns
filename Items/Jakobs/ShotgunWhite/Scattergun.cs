@@ -185,13 +185,13 @@ namespace GloriousGuns.Items.Jakobs.ShotgunWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(4, 5);
-			item.damage =  new UnifiedRandom().Next(12,15);
-			item.knockBack =  new UnifiedRandom().Next(3, 5);
-			item.value = new UnifiedRandom().Next(12600, 18000);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,9f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(4, 5);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(12,15);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(3, 5);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(12600, 18000);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,9f);
 
 			ApplyStats();
 		}

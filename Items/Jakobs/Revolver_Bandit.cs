@@ -180,13 +180,13 @@ namespace GloriousGuns.Items.Jakobs
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(6, 10);
-			item.damage =  new UnifiedRandom().Next(11,15);
-			item.knockBack =  new UnifiedRandom().Next(0, 1);
-			item.value = new UnifiedRandom().Next(600, 1000);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,9f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(6, 10);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(11,15);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0, 1);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(600, 1000);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,9f);
 
 			ApplyStats();
 		}

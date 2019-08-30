@@ -191,14 +191,14 @@ namespace GloriousGuns.Items.Maliwan
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(25, 32);
-			item.damage =  new UnifiedRandom().Next(8, 12);
-			item.knockBack =  new UnifiedRandom().Next(0,2);
-			item.value = new UnifiedRandom().Next(5000, 8000);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(8f,13f);
-			item.reuseDelay = new UnifiedRandom().Next(15, 21);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(25, 32);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(8, 12);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,2);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(5000, 8000);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(8f,13f);
+			item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(15, 21);
 
 			ApplyStats();
 		}

@@ -12,23 +12,19 @@ using System.Collections.Generic;
 
 namespace GloriousGuns.Items.Vladof
 {
-	public class TMP_Dahl : ModItem
+	public class TMP_Dahl : BaseGun
 	{
-		public static string[] RandNames = { "Woeful","Despair","Oppressed","Grim","Angry" };
-
-		protected ushort nameIndex;
+		public override string[] RandNames => new string[] { "Woeful","Despair","Oppressed","Grim","Angry" };
 		//protected int counter;
 
-		public string WeaponName => RandNames[nameIndex%RandNames.Length]+" TMP";
-
-		public override bool CloneNewInstances => false;
+		public override string WeaponName => RandNames[nameIndex%RandNames.Length]+" TMP";
 
 		//Stats
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("TMP");
 		}
-		public override void SetDefaults()
+		public override void NewSetDefaults()
 		{
 			item.ranged = true;
 			item.width = 46;
@@ -41,24 +37,8 @@ namespace GloriousGuns.Items.Vladof
 			item.autoReuse = true;
 			item.shoot = 10;
 			item.useAmmo = AmmoID.Bullet;
-
-			Generate();
 		}
-		public override ModItem Clone(Item itemClone)
-		{
-			var myClone = (TMP_Dahl)base.Clone(itemClone);
-			
-			myClone.nameIndex = nameIndex;
-			myClone.item.useTime = item.useAnimation = item.useTime;
-			myClone.item.damage = item.damage;
-			myClone.item.reuseDelay = item.reuseDelay;
-			myClone.item.value = item.value;
-			myClone.item.knockBack = item.knockBack;
-			myClone.item.shootSpeed = item.shootSpeed;
-			myClone.ApplyStats();
-
-			return myClone;
-		}
+		
 
 		//Behavior
 		public override bool Shoot(Player player,ref Vector2 position,ref float speedX,ref float speedY,ref int type,ref int damage,ref float knockBack)
@@ -83,57 +63,6 @@ namespace GloriousGuns.Items.Vladof
             tooltips.Add(line1);
         }
 
-		//IO
-		public override TagCompound Save() => new TagCompound {
-			{ nameof(nameIndex),nameIndex },
-			{ nameof(item.useTime),item.useTime },
-			{ nameof(item.damage),item.damage },
-			{ nameof(item.reuseDelay),item.reuseDelay },
-			{ nameof(item.value),item.value },
-			{ nameof(item.knockBack),item.knockBack },
-			{ nameof(item.shootSpeed),item.shootSpeed }
-		};
-		public override void Load(TagCompound tag)
-		{
-			if(!tag.ContainsKey(nameof(nameIndex))) {
-				return;
-			}
-			
-			nameIndex = tag.Get<ushort>(nameof(nameIndex));
-			item.useAnimation = item.useTime = tag.Get<int>(nameof(item.useTime));
-			item.damage = tag.Get<int>(nameof(item.damage));
-			item.reuseDelay = tag.Get<int>(nameof(item.reuseDelay));
-			item.value = tag.Get<int>(nameof(item.value));
-			item.knockBack = tag.Get<float>(nameof(item.knockBack));
-			item.shootSpeed = tag.Get<float>(nameof(item.shootSpeed));
-
-			ApplyStats();
-		}
-
-		//Net
-		public override void NetSend(BinaryWriter writer)
-		{
-			writer.Write(nameIndex);
-			writer.Write(item.useTime);
-			writer.Write(item.damage);
-			writer.Write(item.reuseDelay);
-			writer.Write(item.value);
-			writer.Write(item.knockBack);
-			writer.Write(item.shootSpeed);
-		}
-		public override void NetRecieve(BinaryReader reader)
-		{
-			nameIndex = reader.ReadUInt16();
-			item.useAnimation = item.useTime = reader.ReadInt32();
-			item.damage = reader.ReadInt32();
-			item.reuseDelay = reader.ReadInt32();
-			item.value = reader.ReadInt32();
-			item.knockBack = reader.ReadSingle();
-			item.shootSpeed = reader.ReadSingle();
-
-			ApplyStats();
-		}
-
 		//Rendering
 		public override Vector2? HoldoutOffset() => new Vector2(-3,0);
 		public override bool PreDrawInWorld(SpriteBatch spriteBatch,Color lightColor,Color alphaColor,ref float rotation,ref float scale,int whoAmI)
@@ -146,21 +75,15 @@ namespace GloriousGuns.Items.Vladof
 			return true;
 		}
 
-		public void Generate()
+		public override void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(8, 14);
-			item.damage =  new UnifiedRandom().Next(6,10);
-			item.knockBack =  new UnifiedRandom().Next(0,1);
-			item.value = new UnifiedRandom().Next(1,5);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(8f,13f);
-
-			ApplyStats();
-		}
-		public void ApplyStats()
-		{
-			item.SetNameOverride(WeaponName);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(8, 14);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(6,10);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(1,5);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(8f,13f);
 		}
 	}
 }

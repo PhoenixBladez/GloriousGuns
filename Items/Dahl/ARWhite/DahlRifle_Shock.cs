@@ -182,14 +182,14 @@ namespace GloriousGuns.Items.Dahl.ARWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(14, 18);
-			item.damage =  new UnifiedRandom().Next(5,7);
-			item.knockBack =  new UnifiedRandom().Next(1,3);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(14, 18);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(5,7);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(1,3);
 			item.value = (item.damage + item.useTime) * 1000;
             item.reuseDelay = 0;
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,9f);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,9f);
 
 			ApplyStats();
 		}

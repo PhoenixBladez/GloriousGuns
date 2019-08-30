@@ -182,14 +182,14 @@ namespace GloriousGuns.Items.Tediore.SMGWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(7, 10);
-			item.damage =  new UnifiedRandom().Next(4,5);
-			item.knockBack =  new UnifiedRandom().Next(0,1);
-			item.value = new UnifiedRandom().Next(12000,15000);
-			SMGBulletsMax = new UnifiedRandom().Next(65, 83);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(6f,8f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(7, 10);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(4,5);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(12000,15000);
+			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(65, 83);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(6f,8f);
 
 			ApplyStats();
 		}

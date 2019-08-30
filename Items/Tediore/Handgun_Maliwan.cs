@@ -87,7 +87,7 @@ namespace GloriousGuns.Items.Tediore
                 Main.PlaySound(new Terraria.Audio.LegacySoundStyle(25, 1));
                 for (int index1 = 0; index1 < 5; ++index1)
                 {
-                int index2 = Dust.NewDust(player.position, player.width, player.height, 263, 0.0f, 0.0f, (int) byte.MaxValue, new Color(), (float) new UnifiedRandom().Next(20, 26) * 0.1f);
+                int index2 = Dust.NewDust(player.position, player.width, player.height, 263, 0.0f, 0.0f, (int) byte.MaxValue, new Color(), (float) GloriousGuns.instance.gloriousRNG.Next(20, 26) * 0.1f);
                 Main.dust[index2].noLight = true;
                 Main.dust[index2].noGravity = true;
                 Main.dust[index2].velocity *= 0.5f;
@@ -189,14 +189,14 @@ namespace GloriousGuns.Items.Tediore
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(6, 10);
-			item.damage =  new UnifiedRandom().Next(9,12);
-			item.knockBack =  new UnifiedRandom().Next(1, 2);
-			item.value = new UnifiedRandom().Next(600, 1000);
-            item.reuseDelay = new UnifiedRandom().Next(5,10);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(9f,12f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(6, 10);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(9,12);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(1, 2);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(600, 1000);
+            item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(5,10);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(9f,12f);
 
 			ApplyStats();
 		}

@@ -84,14 +84,14 @@ namespace GloriousGuns.Items.Torgue
 
 		public override void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(20, 28);
-			item.damage =  new UnifiedRandom().Next(18,22);
-			item.knockBack =  new UnifiedRandom().Next(2,4);
-			item.value = new UnifiedRandom().Next(1000,2500);
-            item.reuseDelay = new UnifiedRandom().Next(20,30);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(.2f,1.2f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(20, 28);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(18,22);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(2,4);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(1000,2500);
+            item.reuseDelay = GloriousGuns.instance.gloriousRNG.Next(20,30);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(.2f,1.2f);
 		}
 	}
 }

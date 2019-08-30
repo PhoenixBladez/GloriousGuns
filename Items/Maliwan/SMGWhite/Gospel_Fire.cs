@@ -202,14 +202,14 @@ namespace GloriousGuns.Items.Maliwan.SMGWhite
 
 		public void Generate()
 		{
-			nameIndex = (ushort)new UnifiedRandom().Next(RandNames.Length);
+			nameIndex = (ushort)GloriousGuns.instance.gloriousRNG.Next(RandNames.Length);
 
-			item.useAnimation = item.useTime = new UnifiedRandom().Next(7, 10);
-			item.damage =  new UnifiedRandom().Next(3,4);
-			item.knockBack =  new UnifiedRandom().Next(0,1);
-			item.value = new UnifiedRandom().Next(11000,15000);
-			SMGBulletsMax = new UnifiedRandom().Next(40, 50);
-			item.shootSpeed =  new UnifiedRandom().NextFloat(5f,7f);
+			item.useAnimation = item.useTime = GloriousGuns.instance.gloriousRNG.Next(7, 10);
+			item.damage =  GloriousGuns.instance.gloriousRNG.Next(3,4);
+			item.knockBack =  GloriousGuns.instance.gloriousRNG.Next(0,1);
+			item.value = GloriousGuns.instance.gloriousRNG.Next(11000,15000);
+			SMGBulletsMax = GloriousGuns.instance.gloriousRNG.Next(40, 50);
+			item.shootSpeed =  GloriousGuns.instance.gloriousRNG.NextFloat(5f,7f);
 
 			ApplyStats();
 		}
