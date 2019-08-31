@@ -27,6 +27,7 @@ namespace GloriousGuns.Items
 		public bool shotFromShockWeaponCommon = false;
 		public bool shotFromMaliwanShockCommon = false;
         public bool shotFromJudge = false;
+        public bool shotFromGwensHead = false;
 
 		public override bool PreAI(Projectile projectile)
 		{
@@ -173,6 +174,10 @@ namespace GloriousGuns.Items
             if (shotFromJudge && crit)
             {
                 damage = (int)(damage * 1.63f);
+            }
+            if (shotFromGwensHead && crit)
+            {
+                damage = (int)(damage * 1.38f);
             }
         }
 	}

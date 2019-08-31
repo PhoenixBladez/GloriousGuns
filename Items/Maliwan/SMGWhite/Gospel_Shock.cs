@@ -67,9 +67,9 @@ namespace GloriousGuns.Items.Maliwan.SMGWhite
             string SMGClip = "" + SMGBulletsMax;
 			var line = new TooltipLine(mod, "", "Reloads every " + SMGClip + " shots");     
             tooltips.Add(line);   
-            TooltipLine line = new TooltipLine(mod, "ItemName", "Shock Weapon\nElectric damage scales with the target's movement speed");
-            line.overrideColor = new Color(29,100, 198);
-            tooltips.Add(line);
+            TooltipLine line2 = new TooltipLine(mod, "ItemName", "Shock Weapon\nElectric damage scales with the target's movement speed");
+            line2.overrideColor = new Color(29,100, 198);
+            tooltips.Add(line2);
             TooltipLine line1 = new TooltipLine(mod, "Damage", "Maliwan");
             line1.overrideColor = new Color(176, 157, 127);
             tooltips.Add(line1);

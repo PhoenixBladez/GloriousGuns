@@ -55,7 +55,8 @@ namespace GloriousGuns
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanFire") ||
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanShock") ||
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanSlag") ||
-				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanCorrosive"))
+				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanCorrosive") ||
+				player.HeldItem.type == mod.ItemType("GwensHead"))
 			{
 				player.scope = true;	
 			}

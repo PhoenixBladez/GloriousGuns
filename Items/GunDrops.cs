@@ -53,7 +53,7 @@ namespace GloriousGuns.Items
 					Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, CommonPistol_Dahl);
 				}
 			}
-			if (!npc.SpawnedFromStatue)
+			if (!npc.SpawnedFromStatue) //&& npc.type != NPCID.BlueSlime)
 			{
 				if (npc.aiStyle != 7 && !(npc.catchItem > 0) && ((npc.aiStyle != 6 && npc.aiStyle != 37)) && npc.type != 401 && npc.type != 488 && npc.type != 371 && npc.lifeMax > 1 && !(npc.aiStyle == 0 && npc.value == 0 && npc.npcSlots == 1))
 				{
@@ -63,6 +63,12 @@ namespace GloriousGuns.Items
 						{
 							Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("BasicBullet"), Main.rand.Next(10, 22));
 						}
+						#region UniquePistols
+						if (closest.ZoneCrimson && Main.rand.Next(0, Main.expertMode ? 95 : 115) == 0)
+						{
+							Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("GwensHead"));
+						}
+						#endregion
 						if (closest.ZoneCorrupt || closest.ZoneCrimson || !Main.dayTime && !closest.ZoneBeach && !closest.ZoneHoly && !closest.ZoneSnow && closest.ZoneDungeon && closest.ZoneOverworldHeight)
 						{
 							if (Main.rand.Next(0, Main.expertMode ? 60 : 75) == 0)
