@@ -92,7 +92,7 @@ namespace GloriousGuns.Items.Dahl.SMGWhite
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int projectileFired = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromFireWeaponCommon = true;
+			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>().shotFromFireWeaponCommon = true;
 			if (SMGBullets == 1)
 			{
  				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y - 20, player.width, player.height), new Color(255, 255, 255, 100),
@@ -134,7 +134,7 @@ namespace GloriousGuns.Items.Dahl.SMGWhite
 				}
 			int proj2 = Projectile.NewProjectile(position.X, position.Y, newVect.X, newVect.Y, type, damage, 0, player.whoAmI);
 			Projectile newProj2 = Main.projectile[proj2];
- 			Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromFireWeaponCommon = true;           
+ 			Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>().shotFromFireWeaponCommon = true;           
 			}
 			return false;
 		}

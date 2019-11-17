@@ -94,7 +94,7 @@ namespace GloriousGuns.Items.Hyperion.ShotgunWhite
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int proj2 = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromShockWeaponCommon= true;
+				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>().shotFromShockWeaponCommon= true;
 			Projectile newProj2 = Main.projectile[proj2];
 			}
 			if (accurateBullets >= 12)

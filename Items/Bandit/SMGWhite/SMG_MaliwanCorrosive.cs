@@ -82,7 +82,7 @@ namespace GloriousGuns.Items.Bandit.SMGWhite
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int projectileCorrosived = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromAcidWeaponCommon = true;
+			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>().shotFromAcidWeaponCommon = true;
 			if (SMGBullets == 1)
 			{
  				CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y - 20, player.width, player.height), new Color(255, 255, 255, 100),

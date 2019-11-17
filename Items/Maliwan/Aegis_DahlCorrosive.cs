@@ -85,7 +85,7 @@ namespace GloriousGuns.Items.Maliwan
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int projectileCorrosived = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromMaliwanAcidCommon = true;
+			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>().shotFromMaliwanAcidCommon = true;
 			return false;
 		}
 		public override void HoldItem(Player player)

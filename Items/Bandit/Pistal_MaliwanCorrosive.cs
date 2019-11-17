@@ -77,7 +77,7 @@ namespace GloriousGuns.Items.Bandit
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int projectileFired = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromAcidWeaponCommon = true;
+			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>().shotFromAcidWeaponCommon = true;
 			return false;
 		}
 

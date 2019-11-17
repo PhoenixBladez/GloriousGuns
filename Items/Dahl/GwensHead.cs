@@ -62,7 +62,7 @@ namespace GloriousGuns.Items.Dahl
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int proj = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, crit, player.whoAmI);
-			Main.projectile[proj].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromGwensHead = true;
+			Main.projectile[proj].GetGlobalProjectile<GloriousGunsGProj>().shotFromGwensHead = true;
 			return false;
 		}
 		public override void HoldItem(Player player)

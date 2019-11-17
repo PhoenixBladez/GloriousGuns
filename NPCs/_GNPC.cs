@@ -31,6 +31,7 @@ namespace GloriousGuns.NPCs
 		public bool corrosive = false;
 		public bool shock = false;
 		public bool incendiary = false;
+		public bool tracked = false;
 		
         public bool nameConfirmed = false;
         public bool MPSynced = false;
@@ -96,7 +97,7 @@ namespace GloriousGuns.NPCs
             }
 			if (npc.aiStyle != 7 && !(npc.catchItem > 0) && ((npc.aiStyle != 6 && npc.aiStyle != 37)) && npc.type != 401 && npc.type != 488 && npc.type != 371 && npc.lifeMax > 1 && !(npc.aiStyle == 0 && npc.value == 0 && npc.npcSlots == 1))
             {
-                if (Main.rand.Next(0, Main.expertMode ? 90 : 100) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
+                if (Main.rand.Next(0, Main.expertMode ? 110 : 125) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
                 {
                     npc.GivenName = "Slagged " + npc.GivenName;
                     elementalType += "Slagged #";
@@ -104,14 +105,14 @@ namespace GloriousGuns.NPCs
                     npc.value *= 1.23f;
 					npc.defense /= 4;
                 }
-                if (Main.rand.Next(0, Main.expertMode ? 90 : 100) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
+                if (Main.rand.Next(0, Main.expertMode ?110 : 125) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
                 {
                     npc.GivenName = "Corrosive " + npc.GivenName;
                     elementalType += "Corrosive #";
 					npc.buffImmune[mod.BuffType("CorrosiveDebuff")] = true;
                     npc.value *= 1.23f;
                 }
-                if (Main.rand.Next(0, Main.expertMode ? 90 : 100) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
+                if (Main.rand.Next(0, Main.expertMode ? 110 : 125) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
                 {
                     npc.GivenName = "Burning " + npc.GivenName;
                     elementalType += "Burning #";
@@ -119,7 +120,7 @@ namespace GloriousGuns.NPCs
 					npc.buffImmune[BuffID.OnFire] = true;
                     npc.value *= 1.23f;
                 }
-                if (Main.rand.Next(0, Main.expertMode ? 90 : 100) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
+                if (Main.rand.Next(0, Main.expertMode ? 110 : 125) == 0 && (npc.value != 0 || (npc.type >= 402 && npc.type <= 429)) && npc.type != 239 && npc.type != 240 && npc.type != 469 && npc.type != 238 && npc.type != 237 && npc.type != 236 && npc.type != 164 && npc.type != 165 && npc.type != 163)
                 {
                     npc.GivenName = "Electrified " + npc.GivenName;
                     elementalType += "Electrified #";
@@ -159,6 +160,10 @@ namespace GloriousGuns.NPCs
 					}
 				}	
             }
+			if (npc.HasBuff(mod.BuffType("AtlasTracked")))
+            {
+                drawColor = new Microsoft.Xna.Framework.Color(255, 89, 100, 100);
+			}
 			if (elementalType.Contains("Burning ") || npc.HasBuff(mod.BuffType("FireDebuff")))
             {
                 drawColor = new Microsoft.Xna.Framework.Color(219, 70, 43);
@@ -192,16 +197,15 @@ namespace GloriousGuns.NPCs
 		{
 			if (npc.HasBuff(mod.BuffType("SlagDebuff")) && !npc.boss)
 			{
-				damage *= 2;
+				damage = damage + (int)damage/2;
 			}	
-		}
-		public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+		}		public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
 		{
 			if (npc.HasBuff(mod.BuffType("SlagDebuff")) && !npc.boss)
 			{
-				if (!projectile.GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromSlagWeaponCommon)
+				if (!projectile.GetGlobalProjectile<GloriousGunsGProj>().shotFromSlagWeaponCommon)
 				{ 
-				damage *= 2;
+					damage = damage + (int)damage/2;
 				}
 			}	
 		}

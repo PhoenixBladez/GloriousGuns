@@ -104,7 +104,7 @@ namespace GloriousGuns.Items.Jakobs
                 revolverBullets = 9;
             }
             int projectileSlagd = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, crit, player.whoAmI);
-			Main.projectile[projectileSlagd].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromJudge = true;
+			Main.projectile[projectileSlagd].GetGlobalProjectile<GloriousGunsGProj>().shotFromJudge = true;
 			return false;
 		}
 		//IO

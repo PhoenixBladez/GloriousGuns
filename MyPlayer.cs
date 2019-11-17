@@ -34,7 +34,7 @@ namespace GloriousGuns
 		}
 		public override void PreUpdate()
 		{
-			if (player.statLifeMax2 >= 200 && !firstLootCache)
+			if (player.statLifeMax2 >= 140 && !firstLootCache)
 			{
 				firstLootCache = true;
 				player.QuickSpawnItem(mod.ItemType("BasicChest"));
@@ -56,7 +56,8 @@ namespace GloriousGuns
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanShock") ||
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanSlag") ||
 				player.HeldItem.type == mod.ItemType("SMG_DahlMaliwanCorrosive") ||
-				player.HeldItem.type == mod.ItemType("GwensHead"))
+				player.HeldItem.type == mod.ItemType("GwensHead") ||
+				player.HeldItem.type == mod.ItemType("Hornet"))
 			{
 				player.scope = true;	
 			}

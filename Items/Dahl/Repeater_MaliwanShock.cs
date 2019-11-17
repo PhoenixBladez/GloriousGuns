@@ -77,7 +77,7 @@ namespace GloriousGuns.Items.Dahl
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
 			int projectileFired = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromShockWeaponCommon = true;
+			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>().shotFromShockWeaponCommon = true;
 			return false;
 		}
 		public override void HoldItem(Player player)

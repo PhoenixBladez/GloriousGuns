@@ -16,7 +16,7 @@ namespace GloriousGuns.Items.Quest
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("ECHO Log #1");
-            Tooltip.SetDefault("Greeting, prospective Vault Hunter\nThe Dahl Corporation is interested in samples of Life Crystals!\nPlease collect and use five or more for adequate data observation.\nYour first supply drop will arrive then.");
+            Tooltip.SetDefault("Stand straight, maggot!\nThe Dahl Corporation wants Life Crystals, stat!\nCollect and use two or more. That's an order!\nFinish the mission for your rations, recruit!");
 			GloriousGunsGlowmask.AddGlowMask(item.type, "GloriousGuns/Items/Quest/EchoRecorder_Glow");
 
         }

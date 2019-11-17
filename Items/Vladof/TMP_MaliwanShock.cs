@@ -57,7 +57,7 @@ namespace GloriousGuns.Items.Vladof
 			speedX = baseSpeed * (float)Math.Sin(randomAngle);
 			speedY = baseSpeed * (float)Math.Cos(randomAngle);
             int projectileShockd = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileShockd].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromShockWeaponCommon = true;
+			Main.projectile[projectileShockd].GetGlobalProjectile<GloriousGunsGProj>().shotFromShockWeaponCommon = true;
 			return false;
 		}
 

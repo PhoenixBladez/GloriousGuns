@@ -108,7 +108,7 @@ namespace GloriousGuns.Items.Hyperion.SMGWhite
                 SMGBullets = SMGBulletsMax;
             }
 			int projectileSlagd = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileSlagd].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromSlagWeaponCommon = true;
+			Main.projectile[projectileSlagd].GetGlobalProjectile<GloriousGunsGProj>().shotFromSlagWeaponCommon = true;
 			return false;
 		}
 

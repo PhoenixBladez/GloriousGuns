@@ -96,7 +96,7 @@ namespace GloriousGuns.Items.Hyperion
 				accurateBullets = 1;
 			}
 			int projectileFired = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromFireWeaponCommon = true;
+			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>().shotFromFireWeaponCommon = true;
 			return false;
 		}
         public override void ModifyTooltips(List<TooltipLine> tooltips)

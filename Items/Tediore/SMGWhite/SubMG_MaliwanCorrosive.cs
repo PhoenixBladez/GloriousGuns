@@ -105,7 +105,7 @@ namespace GloriousGuns.Items.Tediore.SMGWhite
                 SMGBullets = SMGBulletsMax;
             }
 			int projectileCorrosived = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromAcidWeaponCommon = true;
+			Main.projectile[projectileCorrosived].GetGlobalProjectile<GloriousGunsGProj>().shotFromAcidWeaponCommon = true;
 			return false;
 		}
 	  	public override void ModifyTooltips(List<TooltipLine> tooltips)

@@ -18,12 +18,12 @@ namespace GloriousGuns.Buffs
 
 		public override void Update(Player player, ref int buffIndex)
 		{
-			player.GetModPlayer<MyPlayer>(mod).corrosive = true;
+			player.GetModPlayer<MyPlayer>().corrosive = true;
 		}
 
 		public override void Update(NPC npc, ref int buffIndex)
 		{
-			npc.GetGlobalNPC<GNPC>(mod).corrosive = true;
+			npc.GetGlobalNPC<GNPC>().corrosive = true;
 		}
 	}
 }

@@ -91,7 +91,7 @@ namespace GloriousGuns.Items.Tediore.ShotgunWhite
                 Main.dust[index2].scale *= .6f;
                 }
                 int proj2 = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage /2 * 3, knockBack, player.whoAmI);
-				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromFireWeaponCommon = true;
+				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>().shotFromFireWeaponCommon = true;
 			}
             else
             {
@@ -110,7 +110,7 @@ namespace GloriousGuns.Items.Tediore.ShotgunWhite
                     }
                 int proj2 = Projectile.NewProjectile(position.X, position.Y, newVect.X, newVect.Y, type, damage, knockBack, player.whoAmI);
                 Projectile newProj2 = Main.projectile[proj2];
-				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromFireWeaponCommon = true;
+				Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>().shotFromFireWeaponCommon = true;
                 }
             }
             if (shotgunBullets <= 1)

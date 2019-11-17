@@ -106,7 +106,7 @@ namespace GloriousGuns.Items.Tediore
                 handgunBullets = 9;
             }
 			int projectileFired = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromShockWeaponCommon = true;
+			Main.projectile[projectileFired].GetGlobalProjectile<GloriousGunsGProj>().shotFromShockWeaponCommon = true;
 			return false;
 		}
         public override void ModifyTooltips(List<TooltipLine> tooltips)

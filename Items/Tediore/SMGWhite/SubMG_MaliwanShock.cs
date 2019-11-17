@@ -105,7 +105,7 @@ namespace GloriousGuns.Items.Tediore.SMGWhite
                 SMGBullets = SMGBulletsMax;
             }
 			int projectileShockd = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, player.whoAmI);
-			Main.projectile[projectileShockd].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromShockWeaponCommon = true;
+			Main.projectile[projectileShockd].GetGlobalProjectile<GloriousGunsGProj>().shotFromShockWeaponCommon = true;
 			return false;
 		}
 	  	public override void ModifyTooltips(List<TooltipLine> tooltips)

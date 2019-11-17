@@ -83,7 +83,7 @@ namespace GloriousGuns.Items.Bandit.ShotgunWhite
 				}
 			int proj2 = Projectile.NewProjectile(position.X, position.Y, newVect.X, newVect.Y, type, damage, knockBack, player.whoAmI);
 			Projectile newProj2 = Main.projectile[proj2];
-			Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>(mod).shotFromSlagWeaponCommon = true;
+			Main.projectile[proj2].GetGlobalProjectile<GloriousGunsGProj>().shotFromSlagWeaponCommon = true;
 			}
 			return false;
 		}

@@ -18,12 +18,12 @@ namespace GloriousGuns.Buffs
 
 		public override void Update(Player player, ref int buffIndex)
 		{
-			player.GetModPlayer<MyPlayer>(mod).incendiary = true;
+			player.GetModPlayer<MyPlayer>().incendiary = true;
 		}
 
 		public override void Update(NPC npc, ref int buffIndex)
 		{
-			npc.GetGlobalNPC<GNPC>(mod).incendiary = true;
+			npc.GetGlobalNPC<GNPC>().incendiary = true;
 		}
 	}
 }
