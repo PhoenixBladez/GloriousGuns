@@ -1,5 +1,6 @@
 author = Yuyutsu
-version = 0.1.1
+version = 0.2.1
 displayName = Guns, Glorious Guns!
+homepage = https://forums.terraria.org/index.php?threads/guns-glorious-guns.82294/#post-1806368
 languageVersion = 6
 

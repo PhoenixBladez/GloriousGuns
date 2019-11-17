@@ -1,1 +1,4 @@
-Guns, Glorious Guns! is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Guns, Glorious Guns is a mod that will drastically enhance your gunplay! By adding procedurally generated guns based on guns from the Borderlands series, you'll never find the same gun twice! Guns can have all kinds of cool elemental types, damage and critical hit values, and special effects based on their manufacturer! There are currently:
+- 145 Gun Archetypes. These include: Pistols, SMGs, Shotguns, and ARs
+- This means there are 10 billion+ possible guns
+- 1 Quest! Make a new character to receive your first quest. More to come soon.
